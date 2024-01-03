@@ -53,5 +53,5 @@ const posts = [
         },
         "likes": 95,
         "created": "2021-03-05"
-    }
+    } 
 ];
