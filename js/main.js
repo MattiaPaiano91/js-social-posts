@@ -1,3 +1,28 @@
+
+// esercizio di oggi: Social Posts
+
+// Descrizione
+// Ricreiamo un feed social aggiungendo al layout di base fornito, il nostro script JS in cui:
+// Milestone 1 - Creiamo il nostro array di oggetti che rappresentano ciascun post.
+// Ogni post dovrà avere le informazioni necessarie per stampare la relativa card:
+// - id del post, numero progressivo da 1 a n
+// - nome autore,
+// - foto autore,
+// - data in formato americano (mm-gg-yyyy),
+// - testo del post,
+// - immagine (non tutti i post devono avere una immagine),
+// - numero di likes.
+
+
+// Milestone 2 - Prendendo come riferimento il layout di esempio presente nell'html, stampiamo i post del nostro feed.
+// Milestone 3 - Se clicchiamo sul tasto "Mi Piace" cambiamo il colore al testo del bottone e incrementiamo il counter dei likes relativo.
+// Salviamo in un secondo array gli id dei post ai quali abbiamo messo il like.
+
+
+
+
+
+
 const posts = [
     {
         "id": 1,
@@ -38,7 +63,7 @@ const posts = [
         "media": "https://unsplash.it/600/400?image=24",
         "author": {
             "name": "Luca Formicola",
-            "image": null
+            "image": "https://unsplash.it/300/300?image=45"
         },
         "likes": 56,
         "created": "2021-04-03"
@@ -55,3 +80,40 @@ const posts = [
         "created": "2021-03-05"
     } 
 ];
+
+const postContainer = document.getElementById('container')
+
+
+posts.forEach((element,index) =>  
+{ postContainer.innerHTML += `
+<div class="post" id="post-${posts[index].id}">
+            <div class="post__header">
+                <div class="post-meta">                    
+                    <div class="post-meta__icon">
+                        <img class="profile-pic" src=${posts[index].author.image} alt="Phil Mangione">                    
+                    </div>
+                    <div class="post-meta__data">
+                        <div class="post-meta__author">${posts[index].author.name}</div>
+                        <div class="post-meta__time">${posts[index].created}</div>
+                    </div>                     
+                </div>
+            </div>
+            <div class="post__text">${posts[index].content}</div>
+            <div class="post__image">
+                <img src=${posts[index].media} alt="">
+            </div>
+            <div class="post__footer">
+                <div class="likes js-likes">
+                    <div class="likes__cta">
+                        <a class="like-button  js-like-button" href="#" data-postid="1">
+                            <i class="like-button__icon fas fa-thumbs-up" aria-hidden="true"></i>
+                            <span class="like-button__label">Mi Piace</span>
+                        </a>
+                    </div>
+                    <div class="likes__counter">
+                        Piace a <b id="like-counter-${posts[index].id}" class="js-likes-counter">${posts[index].likes}</b> persone
+                    </div>
+                </div> 
+            </div>            
+        </div>
+`;})
