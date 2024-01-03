@@ -99,7 +99,7 @@ posts.forEach((element,index) =>
                 </div>
             </div>
             <div class="post__text">${posts[index].content}</div>
-            <div class="post__image">
+            <div class="post__image"> 
                 <img src=${posts[index].media} alt="">
             </div>
             <div class="post__footer">
