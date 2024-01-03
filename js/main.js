@@ -81,9 +81,12 @@ const posts = [
     } 
 ];
 
+
+//Seleziono il div in cui stamperò tutti i post
 const postContainer = document.getElementById('container')
 
-
+// Creo un ciclo forEach che mi stampi in pagina tutti i post tramite un template literal.
+// Vado poi a sostuire i valori interssati con i valori presi dinamicamente dall'array di oggetti tramice l'indice di iterazione
 posts.forEach((element,index) =>  
 { postContainer.innerHTML += `
 <div class="post" id="post-${posts[index].id}">
@@ -105,7 +108,7 @@ posts.forEach((element,index) =>
             <div class="post__footer">
                 <div class="likes js-likes">
                     <div class="likes__cta">
-                        <a class="like-button  js-like-button" href="#" data-postid="1">
+                        <a class="like-button  js-like-button" href="#" data-postid="${posts[index].id}">
                             <i class="like-button__icon fas fa-thumbs-up" aria-hidden="true"></i>
                             <span class="like-button__label">Mi Piace</span>
                         </a>
@@ -116,4 +119,28 @@ posts.forEach((element,index) =>
                 </div> 
             </div>            
         </div>
-`;})
+`});
+
+//Assegno ad una variabile, tramite querySelectorAll, una Nodelist con tutti i bottoni dei post generati
+const likeButtons = document.querySelectorAll(".js-like-button");
+
+//Creo un ciclo forEach che mi permetta di scorrere tutti i bottoni selezionati
+ likeButtons.forEach((element, index) => {
+    //creo un addEventListener che selezione un determinato bottone in base a dove si trova nel ciclo
+     element.addEventListener('click',function(event){
+        //
+         event.preventDefault();
+         let likeCounter = document.getElementById('like-counter-' + posts[index].id)
+         let currentCounter = parseInt(likeCounter.innerHTML);
+
+         if(!this.classList.contains('like-button--liked')){
+             this.classList.add('like-button--liked');
+             likeCounter.innerHTML = currentCounter + 1
+         }
+         else{
+             this.classList.remove('like-button--liked');
+             likeCounter.innerHTML = currentCounter - 1;
+         }
+     });
+     
+});
